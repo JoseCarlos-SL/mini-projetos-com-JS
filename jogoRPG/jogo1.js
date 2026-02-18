@@ -1,6 +1,9 @@
+const readline = require("readline-sync"); // você pode mudar para testar "atacar" ou "fugir"
+
 let vidaJogador = 20;
 let vidaInimigo = 20;
-let acao = "atacar"; // você pode mudar para testar "atacar" ou "fugir"
+
+let curaUsada = false;
 
 console.log("Vida Jogador:", vidaJogador);
 console.log("Vida Inimigo:", vidaInimigo);
@@ -9,6 +12,8 @@ while (vidaJogador > 0 && vidaInimigo > 0) {
 
     let danoJogador = 2;
     let danoInimigo = 2;
+
+    let acao = readline.question("Escolha: atacar, curar ou fugir: ");
 
     // Modo desespero
     if (vidaJogador <= 3) {
@@ -20,10 +25,21 @@ while (vidaJogador > 0 && vidaInimigo > 0) {
         danoInimigo = 3;
     }
 
+    
     if (acao === "atacar") {
         vidaInimigo -= danoJogador;
         console.log("Você atacou e causou", danoJogador, "de dano!");
     } 
+
+    else if (acao ==="curar") {
+        if(vidaJogador <=5 && curaUsada === false)
+        {
+        vidaJogador += 3;
+        curaUsada = true;
+        console.log("Você se curou e recuperou 3 de vida!"); 
+        }  
+    }
+
     else if (acao === "fugir") {
         console.log("Você fugiu!");
         break;
