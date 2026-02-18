@@ -2,6 +2,7 @@ const readline = require("readline-sync"); // você pode mudar para testar "atac
 
 let vidaJogador = 20;
 let vidaInimigo = 20;
+let turnos = 0;
 
 let curaUsada = false;
 
@@ -9,7 +10,7 @@ console.log("Vida Jogador:", vidaJogador);
 console.log("Vida Inimigo:", vidaInimigo);
 
 while (vidaJogador > 0 && vidaInimigo > 0) {
-
+    turnos ++;
     let danoJogador = 2;
     let danoInimigo = 2;
 
@@ -49,9 +50,10 @@ while (vidaJogador > 0 && vidaInimigo > 0) {
         vidaJogador -= danoInimigo;
         console.log("O inimigo atacou e causou", danoInimigo, "de dano!");
     }
-  console.log("Vida Jogador:", vidaJogador);
-  console.log("Vida Inimigo:", vidaInimigo);
-  console.log("----------------------");
+    console.log("Turno atual", turnos)
+    console.log("Vida Jogador:", vidaJogador);
+    console.log("Vida Inimigo:", vidaInimigo);
+    console.log("----------------------");
 }
 
 if (vidaJogador <= 0) {
