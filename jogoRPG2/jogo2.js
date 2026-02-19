@@ -50,6 +50,12 @@ while (personagem.vida > 0 && inimigo.vida > 0) {
   if (acao === "atacar") {
     atacar(inimigo, personagem);
     atacar(personagem, inimigo);
+    rodada ++;
+  }else if (acao === "fugir"){
+    console.log("O usuário fugiu!")
+    break
+  }else {
+    console.log("Nenhuma ação realizada, escolha entre atacar, curar ou fugir")
   }
-  rodada ++;
+  
 }
