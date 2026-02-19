@@ -14,7 +14,8 @@ let inimigo = {
   defesa: 2,
 };
 
-let rodada = 1
+let rodada = 1;
+let usarCura = true;
 
 function atacar(atacante, defensor) {
   if (atacante.vida <= 0) {
@@ -48,12 +49,23 @@ while (personagem.vida > 0 && inimigo.vida > 0) {
   let acao = readline.question("Escolha: atacar, curar ou fugir: ");
 
   if (acao === "atacar") {
-    atacar(inimigo, personagem);
     atacar(personagem, inimigo);
+    atacar(inimigo, personagem);
     rodada ++;
+  }else if(acao === "curar"){
+    if(usarCura == true){
+        personagem.vida += 10
+        usarCura = false
+        atacar(inimigo, personagem);
+        rodada ++;
+    }else{
+        console.log("Cura já usada")
+    }
+    
   }else if (acao === "fugir"){
     console.log("O usuário fugiu!")
     break
+
   }else {
     console.log("Nenhuma ação realizada, escolha entre atacar, curar ou fugir")
   }
