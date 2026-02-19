@@ -1,3 +1,5 @@
+const readline = require("readline-sync"); // você pode mudar para testar "atacar" ou "fugir"
+
 let personagem = {
     nome: "Guerreiro",
     vida: 100,
@@ -13,6 +15,11 @@ let inimigo = {
 }
 
 function atacar(atacante, defensor){
+
+    if(atacante.vida <=0){
+        console.log(`${atacante.nome}, está morto e não pode atacar!`)
+        return
+    }
     let dano = atacante.ataque - defensor.defesa
 
     if (dano < 0){
@@ -21,9 +28,16 @@ function atacar(atacante, defensor){
 
     defensor.vida -=dano
 
-    console.log(atacante.nome, "Causou causado", dano)
-    console.log(defensor.nome, "Possui", defensor.vida,"de vida restante.")
+    console.log(`${atacante.nome} causou ${dano} de dano!`)
+    console.log(`${defensor.nome} possui ${defensor.vida} de vida restante.`)
+
+    if(defensor.vida <= 0){
+        console.log(defensor.nome, "morreu!")
+    }
+    return dano
 }
+
+
 
 atacar(inimigo,personagem)
 atacar(personagem,inimigo)
