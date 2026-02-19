@@ -1,29 +1,55 @@
+const readline = require("readline-sync"); // você pode mudar para testar "atacar" ou "fugir"
+
 let personagem = {
-    nome: "Guerreiro",
-    vida: 100,
-    ataque: 10,
-    defesa:5
-}
+  nome: "Guerreiro",
+  vida: 100,
+  ataque: 10,
+  defesa: 5,
+};
 
 let inimigo = {
-    nome: "Ogro",
-    vida: 50,
-    ataque: 10,
-    defesa:2
+  nome: "Ogro",
+  vida: 50,
+  ataque: 10,
+  defesa: 2,
+};
+
+let rodada = 1
+
+function atacar(atacante, defensor) {
+  if (atacante.vida <= 0) {
+    console.log(`${atacante.nome}, está morto e não pode atacar!`);
+    return;
+  }
+  let dano = atacante.ataque - defensor.defesa;
+
+  if (dano < 0) {
+    dano = 0;
+  }
+
+  defensor.vida -= dano;
+
+  console.log(`${atacante.nome} causou ${dano} de dano!`);
+  console.log(`${defensor.nome} possui ${defensor.vida} de vida restante.`);
+
+  if (defensor.vida <= 0) {
+    console.log(defensor.nome, "morreu!");
+  }
+  return dano;
 }
 
-function atacar(atacante, defensor){
-    let dano = atacante.ataque - defensor.defesa
+while (personagem.vida > 0 && inimigo.vida > 0) {
 
-    if (dano < 0){
-        dano = 0
-    }
+    console.log(`------------- rodada ${rodada} -------------`)
+    console.log("")
+    console.log(`Vida Jogador:, ${personagem.vida}`);
+    console.log(`Vida Inimigo:, ${inimigo.vida}`);
 
-    defensor.vida -=dano
+  let acao = readline.question("Escolha: atacar, curar ou fugir: ");
 
-    console.log(atacante.nome, "Causou causado", dano)
-    console.log(defensor.nome, "Possui", defensor.vida,"de vida restante.")
+  if (acao === "atacar") {
+    atacar(inimigo, personagem);
+    atacar(personagem, inimigo);
+  }
+  rodada ++;
 }
-
-atacar(inimigo,personagem)
-atacar(personagem,inimigo)
