@@ -39,6 +39,17 @@ function atacar(atacante, defensor) {
   return dano;
 }
 
+function cura(user){
+    if(usarCura == true){
+        personagem.vida += 10
+        usarCura = false
+        atacar(inimigo, personagem);
+    }else{
+        console.log("Cura já usada")
+    }
+    return cura
+}
+
 while (personagem.vida > 0 && inimigo.vida > 0) {
 
     console.log(`------------- rodada ${rodada} -------------`)
@@ -51,16 +62,10 @@ while (personagem.vida > 0 && inimigo.vida > 0) {
   if (acao === "atacar") {
     atacar(personagem, inimigo);
     atacar(inimigo, personagem);
-    rodada ++;
+    
   }else if(acao === "curar"){
-    if(usarCura == true){
-        personagem.vida += 10
-        usarCura = false
-        atacar(inimigo, personagem);
-        rodada ++;
-    }else{
-        console.log("Cura já usada")
-    }
+    cura(personagem)
+    rodada ++;
     
   }else if (acao === "fugir"){
     console.log("O usuário fugiu!")
